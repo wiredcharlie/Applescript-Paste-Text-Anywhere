@@ -1,0 +1,21 @@
+tell application "Paster" to activate -- Be sure to save app as Paster.app
+beep 1
+set OldWinName to WinName()
+--say WinName()
+on WinName()
+	tell application "System Events"
+		set frontApp to first application process whose frontmost is true
+		set frontAppName to name of frontApp
+	end tell
+	return frontAppName
+end WinName
+
+repeat while OldWinName is equal to WinName()
+	set OldWinName to WinName()
+	delay 0.1
+end repeat
+
+--say WinName()
+beep 1
+
+tell application "System Events" to keystroke (the clipboard as text)
